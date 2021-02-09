@@ -1,6 +1,6 @@
-x = -10:1:100;
+x = 1:1:12;
 
 for i=1:length(x)
-   x(i) = i^2-x(i)*sum(x)*0.0001*i-i;
+   x(i) = i^2-x(i)* sum(x);
 end
 plot(x)
