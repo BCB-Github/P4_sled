@@ -1,7 +1,6 @@
 %Denne fil definere de parametere vi skal bruge
 %Egenskaber af systemet
-R_electrisk = 5
-l = 0.5 
+
 
 
 
