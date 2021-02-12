@@ -15,15 +15,18 @@ elec_transfer = 1/(Lm*s+Rm);
 [num, den] = numden(elec_transfer);
 den=vpa(den/num);
 elec_transfer_coef_num = [1];
-elec_transfer_coef_den = coeffs(den,"All");
+elec_transfer_coef_den = double(coeffs(den,"All"));
 
 %strøm til torque gain
 
 curr_torq_gain= 2.68e-3;
 
 %torque til rads
+torq_transfer = 1/(J*s+B);
+[num, den] = numden(torq_transfer);
+den=vpa(den/num);
+torq_rads_den = double(coeffs(den,"All"));
 torq_rads_num = [1];
-torq_rads_den  = [J, B];
 
 %rad til trans gain
 rad_trans_gain = 0.05*(1/3)*(30/16);
