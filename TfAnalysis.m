@@ -3,7 +3,7 @@ clear
 %%Variable Setup%%
 
 %J_1     = 194e-9 + 0.15e-7;        %Inertia of motor system
-J_1     = 194e-9 + 0.13e-7;        %Inertia of motor system
+J_1     = 194e-9 + 1.3e-5;        %Inertia of motor system
 J_2     = 24.1e-6 + 2*1.5e-6;        %Inertia of sled system
 M_3     = 0.723 + 0.108;        %Mass of sled system
 %B       = 3.18e-7;             %Viscous friction
@@ -22,7 +22,7 @@ r_3     = 0.01571;     %Radius of gear 3
 
 %% Equations %%
 G_1 = r_3*n_1*n_2;
-G_2 = 1/500;
+G_2 = 1; %1/500;
 J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);
 
 num = [K_tau*G_1*G_2];
