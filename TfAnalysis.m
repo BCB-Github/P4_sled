@@ -25,8 +25,8 @@ G_1 = r_3*n_1*n_2;
 G_2 = 1; %1/500;
 J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);
 
-num = [K_tau*G_1*G_2];
-den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m)];
+num = [K_tau*G_1*G_2];s
+den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m) 0];
 
 G_start= tf([num], [den])
 
