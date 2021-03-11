@@ -26,11 +26,12 @@ G_2 = 1; %1/500;
 J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);
 
 num = [K_tau*G_1*G_2];
-den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m) 0];
+den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m)];
 
 G_start= tf([num], [den])
 
-G = feedback(G_start,1)
+%G = feedback(G_start,1)
+G = G_start;
 
 %% Analysis %%
 close all
