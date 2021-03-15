@@ -4,10 +4,10 @@ clear
 
 %J_1     = 194e-9 + 0.15e-7;        %Inertia of motor system
 J_1     = 194e-9 + 1.3e-5;        %Inertia of motor system
-J_2     = 24.1e-6 + 2*1.5e-6;        %Inertia of sled system
+J_2     = 2.41e-5 + 2*1.5e-6;        %Inertia of sled system
 M_3     = 0.723 + 0.108;        %Mass of sled system
-%B       = 3.18e-7;             %Viscous friction
-B       = 4.966e-6;          
+B       = 3.3;             %Viscous friction
+%B       = 4.966e-6;          
 %L_m     = 85e-6;        %Motor inductance 
 L_m     = 219e-6;
 %R_m     = 5.45;        %Motor resistance
@@ -30,7 +30,8 @@ den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m) 0];
 
 G_start= tf([num], [den])
 
-G = feedback(G_start,1)
+%G = feedback(G_start,1)
+G = G_start;
 
 %% Analysis %%
 close all
