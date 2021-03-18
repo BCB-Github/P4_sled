@@ -2,59 +2,63 @@
 clear
 %%Variable Setup%%
 
-%J_1     = 194e-9 + 0.15e-7;        %Inertia of motor system
-J_1     = 194e-9 + 1.3e-5;        %Inertia of motor system
-J_2     = 2.41e-5 + 2*1.5e-6;        %Inertia of sled system
-M_3     = 0.723 + 0.108;        %Mass of sled system
-B       = 3.3;             %Viscous friction
-%B       = 4.966e-6;          
-%L_m     = 85e-6;        %Motor inductance 
-L_m     = 219e-6;
-%R_m     = 5.45;        %Motor resistance
-R_m     = 0.66;
-%K_tau   = 2.68e-3;        %Motor torque coeffecient
-K_tau   = 42e-3;
-%K_m     = 2.586e-2;        %Motor current constant
-K_m     =0.264;
-n_1     = 1/3;      %First gearing constant
-n_2     = 1;    %Second gearing constant
-r_3     = 0.01571;     %Radius of gear 3
+J_1     = 194e-9 + 1.3e-5;          %Inertia of motor system+ first gear
+J_2     = 2.41e-5 + 2*1.5e-6;       %Inertia of sled and attached gears
+M_3     = 0.723 + 0.108             %Mass of sled system
+B       = 3.3;          %Viscous friction 
+L_m     = 219e-6;       %Motor inductance
+R_m     = 0.66;         %Motor resistance
+K_tau   = 42e-3;        %Torque coeffecient 
+K_m     =0.264;         %Back-EMF coeffecient
+n_1     = 1/3;          %First gearing constant
+n_2     = 1;            %Second gearing constant
+r_3     = 0.01571;      %Radius of gear 3
 
 %% Equations %%
-G_1 = (1/r_3)*n_1*n_2;
-G_2 = 1; %1/500;
-J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);
+G_1 = 1%(1/r_3)*n_1*n_2;              %Angular position to linear position
+G_2 = 1; %1/500;                    %Prototype gain controller
+J = J_1 + n_1^2 *(J_2 + M_3*r_3^2); %Equivalent inertia 
 
-num = [K_tau*G_1*G_2];
-den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m) 0];
+%Definition of numerator and denominator polynomials in the plant
+%transferfunction
 
-G_start= tf([num], [den])
+num = [K_tau*G_1*G_2];  %Numerator polynomial
+den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m) 0];  %Denominator Polynomial  
 
-G = feedback(G_start,1)
-%G = G_start;
+
+G_ol= tf([num], [den])      %Open loop transferfunction
+
+G_cl = feedback(G_ol,1)     %Closed loop transferfunction
+
 
 %% Analysis %%
+%% Open Loop Analysis %%
 close all
 
-P= pole(G);
-Z= zero(G);
-Si=stepinfo(G)
-step(G)
+P_ol= pole(G_ol);
+Z_ol= zero(G_ol);
+
+%bode(G)
+%figure;
+nyquist(G_ol)
 figure;
-impulse(G)
+nichols(G_ol)
 figure;
-bode(G)
+margin(G_ol)
+damp(G_ol)
 figure;
-nyquist(G)
+pzmap(G_ol)
 figure;
-nichols(G)
-figure;
-margin(G)
-damp(G)
-figure;
-pzmap(G)
-figure;
-rlocus(G)
+%rlocus(G)
 p = pzoptions;
 p.Grid = 'on';
-h = rlocusplot(G, p);
+h = rlocusplot(G_ol, p);
+
+%% Closed loop Analysis %%
+
+Si=stepinfo(G_cl)
+figure;
+step(G_cl)
+figure;
+impulse(G_cl)
+damp(G_cl)
