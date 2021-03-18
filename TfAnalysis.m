@@ -1,4 +1,4 @@
-%%% Transferfunction analysis %%%
+%% Transferfunction analysis %%
 clear
 %%Variable Setup%%
 
@@ -75,3 +75,5 @@ impulse(G_cl)
 
 %num = [K_tau*G_1*G_2];  %Numerator polynomial 
 %den = [(J*L_m) (B*L_m+J*R_m) (B*R_m+K_tau*K_m) 0];  %Denominator Polynomial  
+
+%G_servo = tf[num], [den])
