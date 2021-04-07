@@ -26,6 +26,8 @@ G_ol= tf([num], [den])      %Open loop transferfunction
 
 %% Regulator Coeffecients %%
 
+%Spørg Henrik hvis det ikke giver mening, gider ikke skrive alle mulige kommentare%
+
 s_1 = -5.33+5.595*j;
 %s_1 =-5.33+5.33*j;
 
