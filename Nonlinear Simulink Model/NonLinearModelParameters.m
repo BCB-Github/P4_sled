@@ -1,0 +1,11 @@
+J_1     = 194e-9 + 1.3e-5;          %Inertia of motor system+ first gear
+J_2     = 2.41e-5 + 2*1.5e-6;       %Inertia of sled and attached gears
+M_3     = 0.723 + 0.108;            %Mass of sled system
+B       = 3.4;          %Viscous friction 
+L_m     = 219e-6;       %Motor inductance
+R_m     = 0.66;         %Motor resistance
+K_tau   = 42e-3;        %Torque coeffecient 
+K_m     = 0.264;        %Back-EMF coeffecient
+n_1     = 1/3;          %First gearing constant
+r_3     = 0.01571;      %Radius of gear 3
+J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);     % Total equivalent Inertia
