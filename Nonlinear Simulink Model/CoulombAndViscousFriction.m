@@ -2,8 +2,8 @@ function FricForce = CoulombAndViscousFriction(u)
 %FRICTION Summary of this function goes here
 % Input force må være u(1) og u(2) må være hastigheden
 
-m = 0.723; %Massen af blokken
-mu = 0.2811026923; %Coulumb friktionskoeficcienten.
+m = 0.546 + 0.14;            %Mass of sled system
+mu = 0.366481157785306; %Coulumb friktionskoeficcienten.
 b = 3.4; % Viscous friktionskoefficient
 F_c = mu*m*9.8; %Coulomb friktion når blokken er i bævegelse.
 F_v = b*abs(u(2));
