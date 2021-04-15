@@ -25,6 +25,8 @@ den =[G_2 G_1 0];            %Denominator polynomial of the mechanical transferf
 G_ol= tf([num], [den])      %Open loop transferfunction
 G_cl = feedback(G_ol,1)     %Closed loop transferfunction with unity feedback
 
+
+
 %% Regulator Coeffecients %%
 
 %Spørg Henrik hvis det ikke giver mening, gider ikke skrive alle mulige kommentare%
