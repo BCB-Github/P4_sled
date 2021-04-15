@@ -1,28 +1,29 @@
-%% PID %%
-
+%% Transferfunction analysis %%
 clear
 %%Variable Setup%%
 
-J_1     = 194e-9 + 1.3e-5;          %Inertia of motor system+ first gear
-J_2     = 2.41e-5 + 2*1.5e-6;       %Inertia of sled and attached gears
-M_3     = 0.723 + 0.108;            %Mass of sled system
-B       = 3.4                       %Viscous friction 
+J_1     = 194.3e-9 + 13e-6 + 275.4e-6 + 2*5.1e-9;                 %Inertia of motor system+ first gear
+J_1     = 194.3e-9 +275.4e-9 +2*5.1e-9 + 13e-6;
+J_2     = 24.1e-6 + 2*1.65e-6 + 4*5.1e-9 + 229.9e-9 + 255.7e-9;   %Inertia of sled and attached gears
+J_2     = (2*1.65e-6 + 4*5.1e-9 + 24.09e-6 +229.9e-9+ 255.7e-9);
+M_3     = 0.546 + 0.14;            %Mass of sled system
+B       = 3.4;                       %Viscous friction 
 K_tau   = 42e-3;                    %Torque coeffecient 
 n_1     = 1/3;                      %First gearing constant
-r_3     = 0.01571;                  %Radius of gear 3
+r_3     = 0.0127;                  %Radius of gear 3
 
 %% Equations %%
 
 J = J_1 + n_1^2 *(J_2 + M_3*r_3^2); %Equivalent inertia of the system, as seen from the motor
 
-G_1 = B*r_3;                        %Describes the first order terms in the mechanical transferfunction
-G_2 = ((J/r_3) + r_3*M_3);          %Describes the second order terms in the mechanical transferfunction
+G_1 = B*r_3*n_1;                        %Describes the first order terms in the mechanical transferfunction
+G_2 = (J/(r_3*n_1));          %Describes the second order terms in the mechanical transferfunction
 
-num = [K_tau/n_1];           %Numerator polynomial of the mechanical transferfunction
+num = [K_tau];           %Numerator polynomial of the mechanical transferfunction
 den =[G_2 G_1 0];            %Denominator polynomial of the mechanical transferfunction
 
 G_ol= tf([num], [den])      %Open loop transferfunction
-
+G_cl = feedback(G_ol,1)     %Closed loop transferfunction with unity feedback
 
 %% Regulator Coeffecients %%
 
