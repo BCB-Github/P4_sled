@@ -5,7 +5,8 @@ function FricForce = CoulombAndViscousFriction(u)
 m = 0.546 + 0.14;            %Mass of sled system
 mu = 0.366481157785306; %Coulumb friktionskoeficcienten.
 b = 3.4; % Viscous friktionskoefficient
-F_c = mu*m*9.8; %Coulomb friktion når blokken er i bævegelse.
+%F_c = mu*m*9.8; %Coulomb friktion.
+F_c = 4.26;
 F_v = b*abs(u(2));
 
 if abs(u(2)) < 1e-3 %Hvis hastigheden er tæt på 0 sidder blokken fast
