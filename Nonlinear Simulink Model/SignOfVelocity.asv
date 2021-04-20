@@ -1,5 +1,0 @@
-function y = fcn(u)
-if xold isempty
-d = x - xold
-
-end
