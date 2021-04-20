@@ -1,4 +1,4 @@
-function y = fcn(u)
+function y = CurrentOffset(u)
 %if abs(u) < 1e-2;
 %    y=0;
 %else
