@@ -10,6 +10,7 @@
 % r_3     = 0.01571;      %Radius of gear 3
 % J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);     % Total equivalent Inertia
 
+%has_run = 1; %% check to see if model parameters have been loaded
 
 J_1     = 194.3e-9 +275.4e-9 +2*5.1e-9 + 13e-6;
 
