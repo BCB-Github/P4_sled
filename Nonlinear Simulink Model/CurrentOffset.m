@@ -1,6 +1,6 @@
 function y = CurrentOffset(u)
 if abs(u) < 1e-3;
-%   y=0;
+   y=0;
 else
 %y = u+(sign(u)*0.745);
 
