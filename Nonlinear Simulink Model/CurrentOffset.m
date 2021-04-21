@@ -1,7 +1,7 @@
 function y = CurrentOffset(u)
-%if abs(u) < 1e-2;
-%    y=0;
-%else
+if abs(u) < 1e-3;
+%   y=0;
+else
 %y = u+(sign(u)*0.745);
 
 if abs(u(2)) < 1e-3
