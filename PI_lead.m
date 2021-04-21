@@ -29,7 +29,7 @@ G_cl = feedback(G_ol,1)     %Closed loop transferfunction with unity feedback
 a = 0.01:0.01:0.5; %Variation of modification to start frequency
 off = 0.01:0.01:0.1;    %Variation of PI start freq
 push = 0.3:0.01:0.7;   %Variation of lead start freq
-T = 0:0.001:25;  
+T = 0:0.001:25;
 
 %[G_ol1 G_ol2 G_ol3 G_ol4] = margin(G_ol);
 
@@ -71,7 +71,7 @@ for j=1:length(push)
         Y_out(k,j,i,:) = Y(:);
 
         %si(k,j,i) = stepinfo(feedback(G_lead_d(k,j,i), 1));
-        si(k,j,i) = stepinfo(Y, T); 
+        si(k,j,i) = stepinfo(Y, T);
 end
 
 end
