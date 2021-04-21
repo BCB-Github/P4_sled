@@ -45,7 +45,10 @@ w_n = abs(s_1);
 a_0 = 0.1:0.01:2;
 %a_0 = [sqrt(2) sqrt(3) sqrt(pi)]
 %b_0 = 0.1:0.1:2;
-b_0 = 1
+b_0 = 0.1:0.1:2
+
+T = 0:0.001:25;
+
 
 
 for i=1:length(a_0)
@@ -58,9 +61,11 @@ for i=1:length(a_0)
         
         G_cont(i,j) = tf([a_1(i) a_0(i)], [b_1(i) b_0(j)]);
         
-        G_design(i,j) = G_ol * G_cont(i,j);
+        G_design_f(i,j) = G_ol * G_cont(i,j);
         
-        si(i,j) = stepinfo(feedback(G_design(i,j), 1));
+        Y = step(feedback(G_lead_d(k,j,i), 1), T);
+
+        si(k,j,i) = stepinfo(Y, T);
         
     end
     
