@@ -6,7 +6,7 @@ else
 
 if abs(u(2)) < 1e-3
     
-    y=u(1) + sign(u(1)) * 0.4924;
+    y=u(1) + sign(u(1)) * 0.4294;
     
 else
     y = u(1)+(sign(u(2))*0.4294);
