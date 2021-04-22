@@ -27,7 +27,7 @@ G_cl = feedback(G_ol,1)     %Closed loop transferfunction with unity feedback
 
 
 a = 0.01:0.01:0.5; %Variation of modification to start frequency
-off = 0.01:0.01:0.1;    %Variation of PI start freq
+off = 0.01:0.01:0.1;    %Variation of PI star   t freq
 push = 0.3:0.01:0.7;   %Variation of lead start freq
 T = 0:0.001:25;
 
