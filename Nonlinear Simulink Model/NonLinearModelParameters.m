@@ -20,7 +20,7 @@ cont_den = [0.04812, 1];
 
 
 T_sample = 0.001;                   %Sample time of controller
-step_size = 0.25; %% magnitude of step response
+step_size = 0.1; %% magnitude of step response
 
 
 %discrete controller type
