@@ -13,12 +13,14 @@
 %has_run = 1; %% check to see if model parameters have been loaded
 
 %Controller
-cont_num = [1.213 2.084 0.3275];
-cont_den = [0.07126 1 0];
+
+
+cont_num = [1.6044, 3];
+cont_den = [0.04812, 1];
 
 
 T_sample = 0.001;                   %Sample time of controller
-step_size = 1; %% magnitude of step response
+step_size = 0.25; %% magnitude of step response
 
 
 %discrete controller type
