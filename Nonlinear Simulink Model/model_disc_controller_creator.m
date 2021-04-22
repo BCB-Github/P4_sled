@@ -111,19 +111,19 @@ length_difference = (den_FD_length - num_FD_length);
 
 if length_difference > 0 %% DVS flere led i denominator
     
-    length_FD = den_FD_length
-    e_n_FD_array = sym(zeros(length_FD, 1)) % A symbolic array as to be remade so that the t values can go in
+    length_FD = den_FD_length;
+    e_n_FD_array = sym(zeros(length_FD, 1)); % A symbolic array as to be remade so that the t values can go in
     for i = length_FD:-1:length_difference + 1 %% This means one number gets iteratorated over
-        e_n_FD_array(i) = num_FD_coeffs(i-length_difference)
+        e_n_FD_array(i) = num_FD_coeffs(i-length_difference);
         %%u_n svarer til denominator
         %%e_n svarer til numerator
     end
     
-    u_n_FD_array = den_FD_coeffs
+    u_n_FD_array = den_FD_coeffs;
     
 elseif length_difference < 0 %% DVS flere led i numerator
-    length_FD = num_FD_length
-    length_difference = abs(length_difference)
+    length_FD = num_FD_length;
+    length_difference = abs(length_difference);
     u_n_FD_array = sym(zeros(length_FD, 1)) % A symbolic array as to be remade so that the t values can go in
     for i = length_FD:-1:length_difference + 1 %% This means one number gets iteratorated over
         i

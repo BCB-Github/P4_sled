@@ -30,5 +30,5 @@ K_tau   = 42e-3;                    %Torque coeffecient
 n_1     = 1/3;                      %First gearing constant
 r_3     = 0.0127;                  %Radius of gear 3
 J_eq = J_1 + n_1^2 *(J_2 + M_3*r_3^2); %Equivalent inertia of the system, as seen from the motor
-T_sample = 0.001;                   %Sample time of controller
+T_sample = 0.0001;                   %Sample time of controller
 Delta = 0.0000079;                  %Smallest distance the encoder measures
