@@ -1,47 +1,6 @@
 %The Idea is that this program will be able to process a transfer function and give an output as a function of discrete time steps
 
-syms s
-%%  USER SET VARIABLES  %%
-%%TRANSFER FUNCTION THAT WILL BE CONVERTED
-%C_s = 1/(s^3 + 2*s^2 + 2*s + 1);
-%T = 0.001
-
-%syms T % [s] Sampling time
 T = T_sample;
-%if exist("T_sample", "var")
-%    T = T_sample
-%end
-
-
-%%%%%%%%%%%
-% Method 1: Input transfer function
-%C_s= (0.8665*s^2 + 1.98*s + 0.234)/(0.2315* s^2 + s)
-%% Alternative Method : input parameters
-
-%[num_C_s, den_C_s]  = numden(C_s);
-
-
-%%%%%%%%%%%%%%%%%%%%%%
-%% put in transfer function coefficients here
-tf_numerator =  cont_num;    %%%%% numerator
-
-tf_denomenator = cont_den; %%%%% numerator
-
-
-
-
-%%%%%%%%%%%%%%%%
-if any(tf_numerator) || any(tf_denomenator)
-    sys = tf(tf_numerator, tf_denomenator)
-    [Num,Den] = tfdata(sys);
-    C_s = poly2sym(cell2mat(Num),s)/poly2sym(cell2mat(Den),s)
-end
-
-
-%C_s = (1.604 * s + 3.1) / (0.04812 * s + 1)
-
-
-%%INITIALIZE VARIABLES
 u_n_array_BD = 0; %% This will be the array for values
 e_n_array_BD = 0; %% This will be the array
 e_n_array_FD = 0;
@@ -67,6 +26,36 @@ syms discrete_FD % Forward difference s replacement
 syms discrete_CD % Central difference s replacement
 
 
+%%%%%%%%%%%
+% Method 1: Input transfer function
+%C_s= (0.8665*s^2 + 1.98*s + 0.234)/(0.2315* s^2 + s)
+%% Alternative Method : input parameters
+
+%[num_C_s, den_C_s]  = numden(C_s);
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% put in transfer function coefficients here
+tf_numerator =  cont_num;    %%%%% numerator
+
+tf_denomenator = cont_den; %%%%% numerator
+
+
+
+
+%%%%%%%%%%%%%%%%
+if any(tf_numerator) || any(tf_denomenator)
+    sys = tf(tf_numerator, tf_denomenator);
+    [Num,Den] = tfdata(sys);
+    C_s = poly2sym(cell2mat(Num),s)/poly2sym(cell2mat(Den),s);
+end
+
+
+
+%%INITIALIZE VARIABLES
+
+
+
 
 
 %TIME CONSTANTS WHEN SWITCHING
@@ -78,7 +67,7 @@ discrete_CD = (2*(q-1))/(T * (q + 1));
 
 
 %% REWRITE FROM LAPLACE DOMAIN TO DISCRETE DOMAIN
-C_s_BD =  subs(C_s, s, discrete_BD)
+C_s_BD =  subs(C_s, s, discrete_BD);
 
 
 
@@ -124,21 +113,20 @@ if length_difference > 0 %% DVS flere led i denominator
 elseif length_difference < 0 %% DVS flere led i numerator
     length_FD = num_FD_length;
     length_difference = abs(length_difference);
-    u_n_FD_array = sym(zeros(length_FD, 1)) % A symbolic array as to be remade so that the t values can go in
+    u_n_FD_array = sym(zeros(length_FD, 1)); % A symbolic array as to be remade so that the t values can go in
     for i = length_FD:-1:length_difference + 1 %% This means one number gets iteratorated over
-        i
         den_FD_coeffs(i-length_difference)
-        u_n_FD_array(i) = den_FD_coeffs(i-length_difference)
+        u_n_FD_array(i) = den_FD_coeffs(i-length_difference);
         %%u_n svarer til denominator
         %%e_n svarer til numerator
     end
     
-    e_n_FD_array = num_FD_coeffs
+    e_n_FD_array = num_FD_coeffs;
     
 else
-    length_FD = num_FD_length
-    e_n_FD_array = num_FD_coeffs %% q^-1
-    u_n_FD_array = den_FD_coeffs %% q^0, q^-1 
+    length_FD = num_FD_length;
+    e_n_FD_array = num_FD_coeffs; %% q^-1
+    u_n_FD_array = den_FD_coeffs; %% q^0, q^-1
 end
 
 
@@ -198,10 +186,6 @@ den_BD_coeffs = flip(coeffs(den_BD, q));  %% B(q)
 
 
 %%ISOLATE INPUT AND OUTPUT SIGNALS
-% f(q) = A(q) / B(q)
-
-% A(q) * U_n = B(q) * e_t
-
 num_length = length(num_BD_coeffs);%% this is how many values will be saved
 den_length = length(den_BD_coeffs);
 
@@ -270,8 +254,8 @@ end
 
 
 if num_FD_length > den_FD_length
-FD_length = num_FD_length;
-else 
+    FD_length = num_FD_length;
+else
     FD_length = den_FD_length;
 end
 
@@ -280,20 +264,49 @@ end
 % The controller array in the first two arrays are decided by the type
 % defined in NonLinearModelParameters
 if disc_type == 1
-discrete_constants = zeros(4, FD_length);
-discrete_constants(1) = u_n_FD_array;
-discrete_constants(2, 1:end) = e_n_FD_array;
-discrete_constants(3) = u_n_array_BD;
-discrete_constants(4, 1:end) = e_n_array_BD;
+    discrete_constants = zeros(4, FD_length);
+    
+    %% The bug is that if the discrete constants is longer than 1 array
+    if length(u_n_FD_array) == 1
+        discrete_constants(1) = u_n_FD_array;
+    else
+        discrete_constants(1, 1:length(u_n_FD_array)) = u_n_FD_array;
+    end
+    discrete_constants(2, 1:end) = e_n_FD_array;
+    
+    if length(u_n_array_BD) == 1
+        discrete_constants(3) = u_n_BD_array;
+    else
+        discrete_constants(3, 1:length(u_n_array_BD)) = u_n_array_BD;
+    end
+    
+    
+    discrete_constants(4, 1:end) = e_n_array_BD;
+    
+    
+    
 else
-discrete_constants = zeros(4, FD_length);
-discrete_constants(3) = u_n_FD_array;
-discrete_constants(4, 1:end) = e_n_FD_array;
-discrete_constants(1) = u_n_array_BD;
-discrete_constants(2, 1:end) = e_n_array_BD;
+    
+    
+    
+    discrete_constants = zeros(4, FD_length);
+    %This if function is a conditional bug fix
+    if length(u_n_FD_array) == 1
+        discrete_constants(3) = u_n_FD_array;
+        discrete_constants(1) = u_n_array_BD;
+        
+    else
+        discrete_constants(3, 1:length(u_n_FD_array)) = u_n_FD_array;
+        discrete_constants(1, 1:length(u_n_FD_array)) = u_n_array_BD;
+        
+    end
+    
+    discrete_constants(4, 1:end) = e_n_FD_array;
+    discrete_constants(2, 1:end) = e_n_array_BD;
 end
 
-%discrete_constants = [u_n_FD_array; e_n_FD_array; u_n_array_BD; e_n_array_BD]
+
+
 
 
 

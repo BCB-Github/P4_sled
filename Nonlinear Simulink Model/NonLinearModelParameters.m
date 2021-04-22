@@ -13,12 +13,16 @@
 %has_run = 1; %% check to see if model parameters have been loaded
 
 %Controller
-cont_num = [1.203 3.6];
-cont_den = [0.04812 1];
+cont_num = [1.213 2.084 0.3275];
+cont_den = [0.07126 1 0];
+
+
+
+step_size = 0.1;
 
 
 %discrete controller type
-disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
+disc_type = 1;  %% 0 is for Backwards Difference, 1 is for forwards_difference
 
 
 
