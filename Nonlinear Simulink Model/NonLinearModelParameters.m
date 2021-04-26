@@ -1,28 +1,7 @@
-% J_1     = 194e-9 + 1.3e-5;          %Inertia of motor system+ first gear
-% J_2     = 2.41e-5 + 2*1.5e-6;       %Inertia of sled and attached gears
-% M_3     = 0.723 + 0.108;            %Mass of sled system
-% B       = 3.4;          %Viscous friction 
-% L_m     = 219e-6;       %Motor inductance
-% R_m     = 0.66;         %Motor resistance
-% K_tau   = 42e-3;        %Torque coeffecient 
-% K_m     = 0.264;        %Back-EMF coeffecient
-% n_1     = 1/3;          %First gearing constant
-% r_3     = 0.01571;      %Radius of gear 3
-% J = J_1 + n_1^2 *(J_2 + M_3*r_3^2);     % Total equivalent Inertia
-
-%has_run = 1; %% check to see if model parameters have been loaded
-
-
-
-
 T_sample = 0.001;                   %Sample time of controller
 step_size = 1; %% magnitude of step response
 %discrete controller type
 disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
-
-
-
-
 %% These are the controller constants for the anti-windup
 cont_num = [0, 1]; 
 cont_den = [1, 0];
@@ -33,16 +12,21 @@ cont_integrator_discrete = discrete_constants;
 %run('model_disc_controller_creator.m');
 %cont_differentiator_discrete = discrete_constants;
 
-
-
-
 %% Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
-cont_num = [1.517, 3.296, 0.2386];
-cont_den = [0.0405206, 1, 0];
-%Nice lead controller: 2.406s +5/0.02406s +1
+
+%Nice lead controllere:
+%1. 
+%cont_num = [1.604 3];
+%cont_den = [0.04812 1];
+%2.
 %cont_num = [2.406 5];
 %cont_den = [0.02406 1];
-%cont_num  = [3.034, 1, 0]
+%Nice PI-Lead controlllere:
+%1. 
+cont_num = [1.517, 3.296, 0.2386];
+cont_den = [0.0405206, 1, 0];
+%2. 
+%cont_num  = [3.034, 7.826, 0.3837]
 %cont_den = [0.01621, 1, 0]
 
 
