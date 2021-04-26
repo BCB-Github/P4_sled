@@ -13,10 +13,19 @@
 %has_run = 1; %% check to see if model parameters have been loaded
 
 %Controller
+cont_num = [2.406, 5];
+cont_den = [0.02406, 1];
 
+%Lead Controller AW block parameters
+k_lead_param = cont_num(2);
+T_lead_param = cont_num(1)/k_lead_param;
+alpha_lead_param = cont_den(1)/T_lead_param;
+F_lead_param = -1/(alpha_lead_param*T_lead_param);
+G_lead_param = 1;
+H_lead_param = k_lead_param/alpha_lead_param*(1/T_lead_param-1/(alpha_lead_param*T_lead_param));
+L_lead_param = k_lead_param/alpha_lead_param;
+M_lead_param = 1/L_lead_param;
 
-cont_num = [1.6044, 3];
-cont_den = [0.04812, 1];
 
 
 T_sample = 0.001;                   %Sample time of controller
