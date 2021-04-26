@@ -15,20 +15,33 @@
 
 
 
-T_sample = 0.001;                   %Sample time of controller
+T_sample = 0.01;                   %Sample time of controller
 step_size = 1; %% magnitude of step response
 %discrete controller type
 disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
 
-cont_num = [0, 1]; %% These are the constants for the AW
-cont_den = [1, 0];
-run('model_disc_controller_creator.m')
-cont_discrete_AW = discrete_constants;
 
-%Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
-cont_num = [2.406, 5];
-cont_den = [0.02406, 1];
-run('model_disc_controller_creator.m')
+
+
+%% These are the controller constants for the anti-windup
+cont_num = [0, 1]; 
+cont_den = [1, 0];
+run('model_disc_controller_creator.m');
+cont_integrator_discrete = discrete_constants;
+cont_num = [1, 0];
+contden = [1];
+run('model_disc_controller_creator.m');
+cont_discretizer_discrete = discrete_constants;
+
+
+
+
+%% Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
+cont_num = [1.517, 3.296, 0.2386];
+cont_den = [0.0405206, 1, 0];
+
+%cont_num  = [3.034, 1, 0]
+%cont_den = [0.01621, 1, 0]
 
 
 
