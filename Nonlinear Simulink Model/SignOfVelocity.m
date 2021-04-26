@@ -1,7 +1,7 @@
 function y = SignOfVelocity(u)
 persistent uold
 if isempty(uold)
-    uold=0
+    uold=0;
 end
 diff = u-uold;
 
@@ -12,7 +12,7 @@ elseif diff < 1e-5 && diff >-1e-5
 elseif diff < -1e-5
     y=-1;
 end
-uold=u
+uold=u;
 
   
 
