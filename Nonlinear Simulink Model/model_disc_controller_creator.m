@@ -43,6 +43,7 @@ tf_denomenator = cont_den; %%%%% numerator
 
 
 
+
 %%%%%%%%%%%%%%%%
 if any(tf_numerator) || any(tf_denomenator)
     sys = tf(tf_numerator, tf_denomenator);
@@ -293,7 +294,7 @@ else
     %This if function is a conditional bug fix
     if length(u_n_FD_array) == 1
         discrete_constants(3) = u_n_FD_array;
-        discrete_constants(1) = u_n_array_BD;
+        discrete_constants(1) = u_n_array_BD(1);
         
     else
         discrete_constants(3, 1:length(u_n_FD_array)) = u_n_FD_array;

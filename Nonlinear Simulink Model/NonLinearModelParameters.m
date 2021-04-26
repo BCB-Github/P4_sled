@@ -15,7 +15,7 @@
 
 
 
-T_sample = 0.01;                   %Sample time of controller
+T_sample = 0.001;                   %Sample time of controller
 step_size = 1; %% magnitude of step response
 %discrete controller type
 disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
@@ -28,10 +28,10 @@ cont_num = [0, 1];
 cont_den = [1, 0];
 run('model_disc_controller_creator.m');
 cont_integrator_discrete = discrete_constants;
-cont_num = [1, 0];
-contden = [1];
-run('model_disc_controller_creator.m');
-cont_discretizer_discrete = discrete_constants;
+%cont_num = [1, 0];
+%cont_den = [1];
+%run('model_disc_controller_creator.m');
+%cont_differentiator_discrete = discrete_constants;
 
 
 
@@ -39,7 +39,9 @@ cont_discretizer_discrete = discrete_constants;
 %% Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
 cont_num = [1.517, 3.296, 0.2386];
 cont_den = [0.0405206, 1, 0];
-
+%Nice lead controller: 2.406s +5/0.02406s +1
+%cont_num = [2.406 5];
+%cont_den = [0.02406 1];
 %cont_num  = [3.034, 1, 0]
 %cont_den = [0.01621, 1, 0]
 
@@ -54,12 +56,34 @@ G_lead_param = 1;
 H_lead_param = k_lead_param/alpha_lead_param*(1/T_lead_param-1/(alpha_lead_param*T_lead_param));
 L_lead_param = k_lead_param/alpha_lead_param;
 M_lead_param = 1/L_lead_param;
-
-
-
-
-
-
+%PI-Lead Controller AW block paramters
+if length(cont_num) == 3 && length(cont_den) == 3
+    PID_lead_led = tf([1],[cont_den(1) 1]);
+    D_PID_param = cont_num(1);
+    P_PID_param = cont_num(2);
+    I_PID_param = cont_num(3);
+    T_i = sqrt(D_PID_param/I_PID_param);
+    cont_num_temp = cont_num;
+    cont_den_temp = cont_den;
+    cont_num = [1];
+    cont_den = [cont_den(1) 1];
+    run('model_disc_controller_creator.m');
+    cont_Leadterm_discrete = discrete_constants;
+    cont_num = cont_num_temp;
+    cont_den = cont_den_temp;
+else
+    % Nedstående er ren nonsen og skal ikke bruges. Det er bare så simulink
+    % ikke bliver sur over udefinerede værdier.
+        PID_lead_led = 0;
+    D_PID_param = 0;
+    P_PID_param = 0;
+    I_PID_param = 0;
+    T_i = 1;
+    cont_num_temp = cont_num;
+    cont_den_temp = cont_den;
+    run('model_disc_controller_creator.m');
+    cont_Leadterm_discrete = discrete_constants;
+end
 
 
 J_1     = 194.3e-9 +275.4e-9 +2*5.1e-9 + 13e-6;
