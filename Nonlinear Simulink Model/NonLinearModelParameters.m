@@ -37,12 +37,20 @@ cont_integrator_discrete = discrete_constants;
 
 
 %% Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
-cont_num = [1.517, 3.296, 0.2386];
-cont_den = [0.0405206, 1, 0];
-%Nice lead controller: 2.406s +5/0.02406s +1
+
+%Nice lead controllere:
+%1. 
+%cont_num = [1.604 3];
+%cont_den = [0.04812 1];
+%2.
 %cont_num = [2.406 5];
 %cont_den = [0.02406 1];
-%cont_num  = [3.034, 1, 0]
+%Nice PI-Lead controlllere:
+%1. 
+cont_num = [1.517, 3.296, 0.2386];
+cont_den = [0.0405206, 1, 0];
+%2. 
+%cont_num  = [3.034, 7.826, 0.3837]
 %cont_den = [0.01621, 1, 0]
 
 
