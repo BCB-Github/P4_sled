@@ -12,9 +12,25 @@
 
 %has_run = 1; %% check to see if model parameters have been loaded
 
-%Controller
+
+
+
+T_sample = 0.001;                   %Sample time of controller
+step_size = 1; %% magnitude of step response
+%discrete controller type
+disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
+
+cont_num = [0, 1]; %% These are the constants for the AW
+cont_den = [1, 0];
+run('model_disc_controller_creator.m')
+cont_discrete_AW = discrete_constants;
+
+%Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
 cont_num = [2.406, 5];
 cont_den = [0.02406, 1];
+run('model_disc_controller_creator.m')
+
+
 
 %Lead Controller AW block parameters
 k_lead_param = cont_num(2);
@@ -28,12 +44,6 @@ M_lead_param = 1/L_lead_param;
 
 
 
-T_sample = 0.001;                   %Sample time of controller
-step_size = 1; %% magnitude of step response
-
-
-%discrete controller type
-disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
 
 
 
@@ -48,3 +58,8 @@ n_1     = 1/3;                      %First gearing constant
 r_3     = 0.0127;                  %Radius of gear 3
 J_eq = J_1 + n_1^2 *(J_2 + M_3*r_3^2); %Equivalent inertia of the system, as seen from the motor
 Delta = 0.0000079;                  %Smallest distance the encoder measures
+
+
+
+
+
