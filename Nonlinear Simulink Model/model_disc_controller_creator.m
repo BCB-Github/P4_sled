@@ -5,6 +5,7 @@ u_n_array_BD = 0; %% This will be the array for values
 e_n_array_BD = 0; %% This will be the array
 e_n_array_FD = 0;
 u_n_array = 0;
+
 syms u_n %% symbolic input
 syms e_t %% symbolic error signal
 syms u_0;   % Current Time input
@@ -306,10 +307,6 @@ else
     discrete_constants(2, 1:end) = e_n_array_BD;
 end
 
-
-
-
-discrete_constants
 
 
 
