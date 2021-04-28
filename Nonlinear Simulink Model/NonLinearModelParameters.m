@@ -1,5 +1,5 @@
 T_sample = 0.001;                   %Sample time of controller
-step_size = 1; %% magnitude of step response
+step_size = 0.1; %% magnitude of step response
 %discrete controller type
 disc_type = 0;  %% 0 is for Backwards Difference, 1 is for forwards_difference
 %% These are the controller constants for the anti-windup
@@ -23,11 +23,11 @@ cont_integrator_discrete = discrete_constants;
 %cont_den = [0.02406 1];
 %Nice PI-Lead controlllere:
 %1. 
-cont_num = [1.517, 3.296, 0.2386];
-cont_den = [0.0405206, 1, 0];
+%cont_num = [1.517, 3.296, 0.2386];
+%cont_den = [0.0405206, 1, 0];
 %2. 
-%cont_num  = [3.034, 7.826, 0.3837]
-%cont_den = [0.01621, 1, 0]
+cont_num  = [3.034, 7.826, 0.3837];
+cont_den = [0.01621, 1, 0];
 
 
 
