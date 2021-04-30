@@ -42,6 +42,8 @@ k_i = 1;
 T_t = 0;
 discrete_cont_lead = zeros(1, 4);
 
+
+%% Controller initialization
 if sat_cont == 1 %% PI LEAD 1
     cont_num_master = [1.517, 3.296, 0.2386];
     cont_den_master = [0.0405206, 1, 0];
@@ -127,21 +129,7 @@ cont_integrator_discrete = discrete_constants;
 %run('model_disc_controller_creator.m');
 %cont_differentiator_discrete = discrete_constants;
 
-%% Controller §§§ CONTROLLER PARAMETERS GO HERE §§§§
-%Nice lead controllere:
-%3. No sat ved 0.1 m
-%cont_num = [1.604 3];
-%cont_den = [0.04812 1];
-%4. Sat ved 1 m
-%cont_num = [2.406 5];
-%cont_den = [0.02406 1];
-%Nice PI-Lead controlllere:
-%1. Sat ved 0.1 m
-%cont_num = [1.517, 3.296, 0.2386];
-%cont_den = [0.0405206, 1, 0];
-%2. Sat ved 0.1 m
-%cont_num  = [3.034, 7.826, 0.3837];
-%cont_den = [0.01621, 1, 0];
+
 
 
 
@@ -165,7 +153,7 @@ M_lead_param = 1/L_lead_param;
 cont_num =   cont_num_master;
 cont_den=   cont_den_master;
 
-%PI-Lead Controller AW block paramters
+%% PI-Lead Controller AW block paramters
 if (length(cont_num) == 3)
     PID_lead_led = tf([1],[cont_den(1) 1]);
     D_PID_param = cont_num(1);
