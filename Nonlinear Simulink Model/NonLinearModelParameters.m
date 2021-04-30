@@ -1,3 +1,4 @@
+clear
 %% Modelling Parameters
 T_sample = 0.001;           %Sample time of controller
 step_size = 1;              %% magnitude of step response
@@ -14,7 +15,7 @@ disc_type = 0;              %% 0 is for Backwards Difference, 1 is for forwards_
 %3 : LEAD no SAT 0.1M
 %4 : LEAD SAT 0.1M
 %5 : PID MED POL CONTROLLER
-sat_cont = 2;               %% CHOICE OF CONTROLLER
+sat_cont = 1;               %% CHOICE OF CONTROLLER
 
 
 %% SYSTEM PARAMETERS
@@ -35,7 +36,10 @@ Delta = 0.0000079;                      %Smallest distance the encoder measures
 
 
 %% Initialization of parameters
+k_p = 0;
 k_d = 0;
+k_i = 1;
+T_t = 0;
 discrete_cont_lead = zeros(1, 4);
 
 if sat_cont == 1 %% PI LEAD 1
@@ -144,7 +148,7 @@ cont_integrator_discrete = discrete_constants;
 %% TO FIND THE LEAD PARAMETERS FOR THE ANTI WINDUP
 cont_num = cont_num_lead;
 cont_den = cont_den_lead;
-T_t = (k_p/k_i)/10; %% TRACKING CONSTANT for anti-windup in lead controller
+T_t = (k_p/k_i)/10;   %% TRACKING CONSTANT for anti-windup in PI-lead controller
 
 %% Lead Controller AW block parameters
 k_lead_param = cont_num(2);
@@ -157,8 +161,12 @@ L_lead_param = k_lead_param/alpha_lead_param;
 M_lead_param = 1/L_lead_param;
 
 
+
+cont_num =   cont_num_master;
+cont_den=   cont_den_master;
+
 %PI-Lead Controller AW block paramters
-if length(cont_num) == 3 && length(cont_den) == 3
+if (length(cont_num) == 3)
     PID_lead_led = tf([1],[cont_den(1) 1]);
     D_PID_param = cont_num(1);
     P_PID_param = cont_num(2);
