@@ -1,5 +1,5 @@
 
-clear
+
 %Simulation parameters go here
 T_sample = 0.001;           %Sample time of controller
 step_size_array = [1, 0.1];              %% magnitude of step response
