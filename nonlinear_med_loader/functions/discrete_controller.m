@@ -118,7 +118,7 @@ elseif length_difference < 0 %% DVS flere led i numerator
     length_difference = abs(length_difference);
     u_n_FD_array = sym(zeros(length_FD, 1)); % A symbolic array as to be remade so that the t values can go in
     for i = length_FD:-1:length_difference + 1 %% This means one number gets iteratorated over
-        den_FD_coeffs(i-length_difference)
+        den_FD_coeffs(i-length_difference);
         u_n_FD_array(i) = den_FD_coeffs(i-length_difference);
         %%u_n svarer til denominator
         %%e_n svarer til numerator
