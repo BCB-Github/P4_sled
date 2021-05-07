@@ -95,8 +95,8 @@ elseif sat_cont == 6
 %   ----------
 %   0.02 s + 1
 
-cont_num_master = double(coeffs((1.328*s + 0.3321) * (2 * s + 4.9), s, 'All'))
-cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'))
+cont_num_master = double(coeffs((1.328*s + 0.3321) * (2 * s + 4.9), s, 'All'));
+cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'));
 
 
     
@@ -124,8 +124,8 @@ elseif sat_cont == 7
 %   -------------
 %   0.03994 s + 1
 
-cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s))
-cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'))
+cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s));
+cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'));
 
 discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_master, cont_den_master);
 

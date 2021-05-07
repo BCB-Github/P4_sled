@@ -67,7 +67,7 @@ for j = 1:length(step_size_array)
             toc
             
             %% Save values of the current run simulation
-            PI_LEAD_ARRAY_old(i + (j-1) * length(CONT_PI_LEAD_ARRAY), :) = [T_sample, step_size_array(j), CONT_PI_LEAD_ARRAY(i)]
+            PI_LEAD_ARRAY_old(i + (j-1) * length(CONT_PI_LEAD_ARRAY), :) = [T_sample, step_size_array(j), CONT_PI_LEAD_ARRAY(i)];
         end
 end
 
@@ -98,7 +98,7 @@ for j = 1:length(step_size_array)
             toc
             
             %% Save values of the current run simulation
-            PI_LEAD_ARRAY_old_1(i + (j-1) * length(CONT_PI_LEAD_ARRAY), :) = [T_sample, step_size_array(j), CONT_PI_LEAD_ARRAY(i)]
+            PI_LEAD_ARRAY_old_1(i + (j-1) * length(CONT_PI_LEAD_ARRAY), :) = [T_sample, step_size_array(j), CONT_PI_LEAD_ARRAY(i)];
         end
 end
 
@@ -142,7 +142,7 @@ for j = 1:length(step_size_array)
             toc
             
             %% Save values of the current run simulation
-            CONT_LEAD_ARRAY_OLD(i + (j-1) * length(CONT_LEAD_ARRAY), :) = [T_sample, step_size_array(j), CONT_LEAD_ARRAY(i)]
+            CONT_LEAD_ARRAY_OLD(i + (j-1) * length(CONT_LEAD_ARRAY), :) = [T_sample, step_size_array(j), CONT_LEAD_ARRAY(i)];
 
         end
 end
@@ -161,9 +161,12 @@ save_system
 
 
 
+if PI_LEAD_array ~= 0
+    plot(time, PI_LEAD_ARRAY_RESULTS)
+    %plot(time, PI_LEAD_ARRAY_RESULTS_1)
+end
 
-plot(time, PI_LEAD_ARRAY_RESULTS)
-plot(time, PI_LEAD_ARRAY_RESULTS_1)
-nexttile
-plot (time, CONT_LEAD_ARRAY_RESULTS)
+if CONT_LEAD_ARRAY ~= 0
+    plot (time, CONT_LEAD_ARRAY_RESULTS)
+end
 
