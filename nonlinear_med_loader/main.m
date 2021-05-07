@@ -1,5 +1,5 @@
 
-
+clear
 %Simulation parameters go here
 T_sample = 0.001;           %Sample time of controller
 step_size_array = [1, 0.1];              %% magnitude of step response
@@ -42,6 +42,7 @@ open_system("Discrete_Model.slx")
 
 %% This simulation is to create an array with the different PI-LEAD controllers using same parameters
 
+disp("This is the PI - LEAD Simulation")
 %%PID SIMULATION
 assign_blocks('on', 'PI-LEAD')
 for j = 1:length(step_size_array)
@@ -112,6 +113,7 @@ end
 
 
 
+disp("This is the LEAD Simulation")
 
 %% for LEAD
 assign_blocks(anti_windup, 'LEAD')
