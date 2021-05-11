@@ -18,7 +18,7 @@ disc_type = 0;              %% 0 is for Backwards Difference, 1 is for forwards_
 %5 : PID MED POL CONTROLLER
 %6 : PI LEAD 3 - sat
 %7 : PI LEAD 4 no sat
-sat_cont = 6;               %% CHOICE OF CONTROLLER
+sat_cont = 2;               %% CHOICE OF CONTROLLER
 
 
 %% SYSTEM PARAMETERS
@@ -132,8 +132,8 @@ elseif sat_cont == 7
 %   -------------
 %   0.03994 s + 1
 
-cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s))
-cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'))
+cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s));
+cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'));
 
 
     

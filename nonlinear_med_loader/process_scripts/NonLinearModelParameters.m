@@ -54,7 +54,8 @@ if sat_cont == 1 %% PI LEAD 1
     k_p = 1.872;
     discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_master, cont_den_master);
 
-    
+    M_tracking_pi_lead = 0.051;
+
 elseif sat_cont == 2 %% PI LEAD 2
     
     cont_num_master  = [3.034, 7.826, 0.3837];
@@ -95,6 +96,13 @@ elseif sat_cont == 6
 %   ----------
 %   0.02 s + 1
 
+
+DAW = 0.9477
+IAW = 8 * 10^-4
+
+
+
+
 cont_num_master = double(coeffs((1.328*s + 0.3321) * (2 * s + 4.9), s, 'All'));
 cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'));
 
@@ -123,6 +131,9 @@ elseif sat_cont == 7
 % 1.331 s + 2.4
 %   -------------
 %   0.03994 s + 1
+
+DAW = 0.95
+IAW = 2.515
 
 cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s));
 cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'));
@@ -167,6 +178,8 @@ else
     discrete_cont_lead = discrete_constants;
     
     T_i = sqrt(k_d/k_i);
+    
+    
 end
 
 
