@@ -5,6 +5,7 @@ disc_type = 0;              %% 0 is for Backwards Difference, 1 is for forwards_
 
 %antiwindup  % either 'on' or 'off'
 anti_windup = 'on';
+ 
 
 
 
@@ -21,8 +22,8 @@ sat_cont = 1;               %% CHOICE OF CONTROLLER
 
 
 %% Choice of controllers to simulate - 0 means none of that type
-CONT_PI_LEAD_ARRAY = [1];
-CONT_LEAD_ARRAY  = 0;
+CONT_PI_LEAD_ARRAY = [1, 2, 6, 7];
+CONT_LEAD_ARRAY  = [3, 4];
 
 
 
@@ -150,23 +151,23 @@ disp("SIMULATION DONE");
 
 
 %% for Plotting
-time = 0:1/10000:2;
+time = 0:1/10000:4;
 
 save_system
 
 for i  = 1:length(CONT_PI_LEAD_ARRAY) * length(step_size_array)
    %disp("Results of controller" + CONT_PI_LEAD_ARRAY(i));
-   PI_results(i) =  stepinfo(PI_LEAD_ARRAY_RESULTS(:, i), time);
+   PI_results(i) =  stepinfo(PI_LEAD_ARRAY_RESULTS(:, i), time, 1);
 end
 
 
 tmp = 0
 for i = 1:width(PI_LEAD_ARRAY_RESULTS_1)
-    if PI_LEAD_ARRAY_RESULTS_1(100, i) == 0
+    if PI_LEAD_ARRAY_RESULTS_1(200, i) == 0
         continue
     end
         tmp = tmp + 1;
-        PI_results_1(tmp) = stepinfo(PI_LEAD_ARRAY_RESULTS_1(:, i), time);
+        PI_results_1(tmp) = stepinfo(PI_LEAD_ARRAY_RESULTS_1(:, i), time, 1);
 end
 
 
@@ -177,15 +178,15 @@ end
 
 
 
-PI_results
+
 
 for i  = 1:length(CONT_LEAD_ARRAY) * length(step_size_array)
     %disp("Results of controller" + CONT_LEAD_ARRAY(i))
-    LEAD_results(i) = stepinfo(CONT_LEAD_ARRAY_RESULTS(:, i), time);
+    LEAD_results(i) = stepinfo(CONT_LEAD_ARRAY_RESULTS(:, i), time, 1);
 
 end
 
-LEAD_results
+
 
 
 

@@ -68,6 +68,11 @@ elseif sat_cont == 2 %% PI LEAD 2
     k_i = 0.1404;
     k_p = 1.872;
     
+    
+    %% tunede tracking constant
+    M_tracking_pi_lead = 0.009852843572073;
+
+    
 elseif sat_cont == 3 %% nice lead controller - no sat 0.1 m
     
     
@@ -97,8 +102,8 @@ elseif sat_cont == 6
 %   0.02 s + 1
 
 
-DAW = 0.9477
-IAW = 8 * 10^-4
+DAW = 0.9477;
+IAW = 8 * 10^-4;
 
 
 
@@ -116,7 +121,7 @@ cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'));
 
     discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_master, cont_den_master);
 
-    
+  M_tracking_pi_lead =   0.009889442255615
 
 elseif sat_cont == 7
 % ----------------------------------------
@@ -132,8 +137,8 @@ elseif sat_cont == 7
 %   -------------
 %   0.03994 s + 1
 
-DAW = 0.95
-IAW = 2.515
+DAW = 0.95;
+IAW = 2.515;
 
 cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s));
 cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'));
@@ -146,6 +151,8 @@ discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_mast
         
     k_i = 0.2324;
     k_p = 1.328;
+
+      M_tracking_pi_lead =   0.030441798642428;
 
 
 
@@ -216,6 +223,13 @@ G_lead_param = 1;
 H_lead_param = k_lead_param/alpha_lead_param*(1/T_lead_param-1/(alpha_lead_param*T_lead_param));
 L_lead_param = k_lead_param/alpha_lead_param;
 M_lead_param = 1/L_lead_param;
+
+%% her indsættes de tunede værdier
+if sat_cont == 3
+    M_lead_param =0.031031268945546;
+elseif sat_cont == 4
+    M_lead_param = 0.009988557323880;
+end
 
 
 
