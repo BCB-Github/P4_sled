@@ -37,7 +37,7 @@ elseif strcmp(anti_windup, 'on1') == 1
     
         if strcmp(controller_type, 'PI-LEAD') == 1
         %% uncomment the line we're interested int
-        set_param('Discrete PID Controller With AW', 'commented', 'off')
+        set_param('Discrete_Model/Discrete PID Controller With AW', 'commented', 'off')
         %% Comment out the line we don't care about
         set_param('Discrete_Model/Discrete PI - Lead Controller With AW','commented','on')
         set_param('Discrete_Model/Discrete lead Controller With AW','commented','on')

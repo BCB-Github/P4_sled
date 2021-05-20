@@ -18,7 +18,7 @@ disc_type = 0;              %% 0 is for Backwards Difference, 1 is for forwards_
 %5 : PID MED POL CONTROLLER
 %6 : PI LEAD 3 - sat
 %7 : PI LEAD 4 no sat
-sat_cont = 2;               %% CHOICE OF CONTROLLER
+%sat_cont = 2;               %% CHOICE OF CONTROLLER
 
 
 %% SYSTEM PARAMETERS
@@ -68,7 +68,6 @@ if sat_cont == 1 %% PI LEAD 1
     k_p = 1.872;
     
 elseif sat_cont == 2 %% PI LEAD 2
-    
     cont_num_master  = [3.034, 7.826, 0.3837];
     cont_den_master = [0.01621, 1, 0];
     
@@ -80,7 +79,6 @@ elseif sat_cont == 2 %% PI LEAD 2
     
 elseif sat_cont == 3 %% nice lead controller - no sat 0.1 m
     
-    
     cont_num_master = [1.604 3];
     cont_den_master = [0.04812 1];
     cont_num_lead = [1.604 3];
@@ -88,7 +86,6 @@ elseif sat_cont == 3 %% nice lead controller - no sat 0.1 m
     
     
 elseif sat_cont == 4 %% nice lead controller - no sat 0.1 m
-    
     
     cont_num_master = [2.406 5];
     cont_den_master = [0.02406 1];

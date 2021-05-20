@@ -54,7 +54,7 @@ if sat_cont == 1 %% PI LEAD 1
     k_p = 1.872;
     discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_master, cont_den_master);
 
-    M_tracking_pi_lead = 0.051;
+    M_tracking_pi_lead = 0.050972067733340;
 
 elseif sat_cont == 2 %% PI LEAD 2
     
@@ -78,8 +78,8 @@ elseif sat_cont == 3 %% nice lead controller - no sat 0.1 m
     
     cont_num_master = [1.604 3];
     cont_den_master = [0.04812 1];
-    cont_num_lead = [1.604 3];
-    cont_den_lead  = [0.04812 1];
+    cont_num_lead = cont_num_master;
+    cont_den_lead  = cont_den_master;
     
     
 elseif sat_cont == 4 %% nice lead controller - no sat 0.1 m
@@ -121,7 +121,7 @@ cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'));
 
     discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_master, cont_den_master);
 
-  M_tracking_pi_lead =   0.009889442255615
+  M_tracking_pi_lead =   0.009890468932116;
 
 elseif sat_cont == 7
 % ----------------------------------------
@@ -152,7 +152,7 @@ discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_mast
     k_i = 0.2324;
     k_p = 1.328;
 
-      M_tracking_pi_lead =   0.030441798642428;
+      M_tracking_pi_lead =   0.030880444811631;
 
 
 
