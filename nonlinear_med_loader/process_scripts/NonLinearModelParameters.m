@@ -4,7 +4,7 @@
 
 
 
-
+sat_cont = 6
 
 
 %% SYSTEM PARAMETERS
@@ -106,9 +106,18 @@ DAW = 0.9477;
 IAW = 8 * 10^-4;
 
 
+K_c = 6.571749;
+TD = 0.38415439;
+TI = 40.3918;
+alpha = 0.00520624;
 
 
-cont_num_master = double(coeffs((1.328*s + 0.3321) * (2 * s + 4.9), s, 'All'));
+
+
+
+
+
+cont_num_master = double(coeffs((1.328*s + 0.03321) * (2 * s + 4.9), s, 'All'));
 cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'));
 
 
@@ -124,6 +133,10 @@ cont_den_master = double(coeffs(s * (0.02 * s + 1), s, 'All'));
   M_tracking_pi_lead =   0.009890468932116;
 
 elseif sat_cont == 7
+    
+    
+    
+    
 % ----------------------------------------
 % Controller will not go to saturation:
 % ----------------------------------------
@@ -137,11 +150,19 @@ elseif sat_cont == 7
 %   -------------
 %   0.03994 s + 1
 
-DAW = 0.95;
-IAW = 2.515;
 
-cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s));
+
+K_c = 3.474721468;
+TD = 0.468877762;
+TI = 6.229332131;
+alpha = 0.085182116;
+
+DAW = 0.95;
+IAW = 0.225;
+
+cont_num_master = double(coeffs((1.328*s + 0.2324) * (1.331* s + 2.4), s, 'All'));
 cont_den_master = double(coeffs(s * (0.03994 * s + 1), s, 'All'));
+
 
 discrete_controller_pid = discrete_controller(T_sample, disc_type, cont_num_master, cont_den_master);
 
@@ -229,6 +250,11 @@ if sat_cont == 3
     M_lead_param =0.031031268945546;
 elseif sat_cont == 4
     M_lead_param = 0.009988557323880;
+elseif sat_cont == 6
+      M_tracking_pi_lead =   0.009890468932116;
+elseif sat_cont == 7
+    M_lead_param =  0.030880444811631;
+    
 end
 
 
@@ -271,5 +297,14 @@ end
 
 cont_num =   cont_num_master;
 cont_den=   cont_den_master;
+
+
+
+%% Det her er lidt lort, men det her er de rigig controller parameter
+if sat_cont == 3
+    M_lead_param = 0.031029247234820;
+elseif sat_cont == 4
+    M_lead_param = 0.009989881215137;
+end
 
 

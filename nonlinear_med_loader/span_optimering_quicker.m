@@ -9,8 +9,8 @@ time = 0:0.0001:simulation_time;
 
 upper_bound = 1;
 ranges = [-5, log10(upper_bound)];
-n = 14; %% Simulation Depth
-iter = 6; % antal zoomie bois
+n = 12; %% Simulation Depth
+iter = 7; % antal zoomie bois
 
 
 
@@ -23,7 +23,7 @@ load_system(model);
 
 
 
-assign_blocks('on', 'PI-LEAD')
+%assign_blocks('on', 'LEAD')
 
 
 
@@ -46,12 +46,12 @@ corrections_faktor =  logspace(log10(-5), log10(upper_bound), n);
 % The number of iterations is iter:
 
 %Changing Variable done here
-controllers = [2, 6, 7];
+controllers = [6];
 
 loop_results = zeros(length(time), length(controllers));
 
 
-step_size = 0.1
+step_size = 1
 
 m_array = zeros(length(controllers), 2)
 
@@ -64,7 +64,7 @@ corrections_faktor =  logspace(ranges(1), ranges(2), n);
 for j = 1 :iter
     tic
     run('nonlinear_quicktest.m')
-    step_size = 0.1;
+    step_size = 1;
 
     %% EVery iteration the logspace ranges change
     corrections_faktor =  logspace(ranges(1), ranges(2), n)
@@ -175,7 +175,7 @@ for j = 1 :iter
      plot(time, loop_results)
      axis([0, 2, 0 , 2])
      saveas(gcf,"iteration" + controllers(k) + "_" + j)
-     close(gcf); 
+    % close(gcf); 
 %     tmp_best
     
     

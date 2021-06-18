@@ -1,10 +1,12 @@
+
+
 %Simulation parameters go here
 T_sample = 0.001;           %Sample time of controller
-step_size_array = [0.1, 1];              %% magnitude of step response
+step_size_array = [1, 0.1];              %% magnitude of step response
 disc_type = 0;              %% 0 is for Backwards Difference, 1 is for forwards_difference
 
 %antiwindup  % either 'on' or 'off'
-anti_windup = 'off';
+anti_windup = 'on1';
 
 
 
@@ -22,8 +24,8 @@ sat_cont = 1;           %% CHOICE OF CONTROLLER
 
 
 %% Choice of controllers to simulate - 0 means none of that type
-CONT_PI_LEAD_ARRAY = [1, 2, 6, 7];
-CONT_LEAD_ARRAY  = [3, 4];
+CONT_PI_LEAD_ARRAY = [6, 7];
+CONT_LEAD_ARRAY  = [0];
 
 
 
@@ -39,9 +41,6 @@ run('initialize_values.m')
 
 %% Run linear simulation because, fine
 open_system('linear_model.slx');
-
-
-
 for i = 1:length(CONT_PI_LEAD_ARRAY) + length(CONT_LEAD_ARRAY)
     step_size = step_size_array(1);
     if i <= length(CONT_PI_LEAD_ARRAY)
@@ -62,7 +61,7 @@ for i = 1:length(CONT_PI_LEAD_ARRAY) + length(CONT_LEAD_ARRAY)
 end
 linear_results = [0:0.0001:5; linear_results];
 
-plot(linear_results(1, :), linear_results(2:7, :))
+plot(linear_results(1, :), linear_results(2:(length(CONT_PI_LEAD_ARRAY) + length(CONT_LEAD_ARRAY)), :))
 legend(strsplit(num2str(linear_array)))
 
 
